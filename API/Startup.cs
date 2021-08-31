@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,29 @@ namespace API
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
+            var Builder = new ConfigurationBuilder();
 
-        public IConfiguration Configuration { get; }
+            Builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            Builder.AddEnvironmentVariables();
+            this.Configuration = Builder.Build();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("API", new OpenApiInfo { 
+                    Title = "API",
+                    Version = "V1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +47,12 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+
+            if (Configuration.GetSection("API").GetValue<bool>("Swagger"))
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/api/swagger.json", "API Json"));
             }
 
             app.UseHttpsRedirection();
