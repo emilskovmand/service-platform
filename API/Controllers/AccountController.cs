@@ -10,6 +10,7 @@ namespace API.Controllers
 {
     [Route("api/account")]
     [ApiController]
+    [Authorize]
     public class AccountController : ControllerBase
     {
         [HttpPost, AllowAnonymous, Route("login")]
