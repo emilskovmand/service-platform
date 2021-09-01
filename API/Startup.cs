@@ -33,8 +33,10 @@ namespace API
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("API", new OpenApiInfo { 
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("API", new OpenApiInfo 
+                { 
                     Title = "API",
                     Version = "V1"
                 });
@@ -44,6 +46,7 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
