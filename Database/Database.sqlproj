@@ -69,4 +69,13 @@
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\ServiceUser.sql" />
+    <Build Include="Tables\CustomerUser.sql" />
+    <Build Include="Tables\ServiceCorporation.sql" />
+    <Build Include="Tables\Countries.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\AvailableCountries.sql" />
+  </ItemGroup>
 </Project>
