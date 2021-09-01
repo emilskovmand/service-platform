@@ -35,7 +35,7 @@ namespace API
 
             services.AddSwaggerGen(c => 
             {
-                c.SwaggerDoc("API", new OpenApiInfo 
+                c.SwaggerDoc("api", new OpenApiInfo 
                 { 
                     Title = "API",
                     Version = "V1"
