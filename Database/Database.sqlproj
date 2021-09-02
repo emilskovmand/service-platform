@@ -22,6 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>False</GenerateCreateScript>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -45,6 +46,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SqlTargetName>Database-db-proj</SqlTargetName>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -60,7 +62,7 @@
     <Folder Include="Functions" />
     <Folder Include="Stored Procedures" />
     <Folder Include="Security" />
-    <Folder Include="Tables" />
+    <Folder Include="Tables\" />
     <Folder Include="Views" />
   </ItemGroup>
   <ItemGroup>
@@ -77,5 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\AvailableCountries.sql" />
+    <None Include="Database.publish.xml" />
+    <None Include="Database.sqlproj.user" />
   </ItemGroup>
 </Project>

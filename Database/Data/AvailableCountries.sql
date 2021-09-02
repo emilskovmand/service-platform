@@ -1,6 +1,4 @@
-﻿SET IDENTITY_INSERT Countries ON
-
-MERGE INTO Countries AS TARGET
+﻿MERGE INTO Countries AS TARGET
 USING (VALUES
 	(1, 'The Kingdom of Denmark', 'Denmark', '+45', 'DK'),
 	(2, 'The Kingdom of Sweden', 'Sweden', '+46', 'SWE'),
@@ -12,7 +10,7 @@ USING (VALUES
 	(8, 'The Kingdom of England', 'England', '+44', 'EN')
 )
 AS SOURCE (CountryId, OfficialName, ShortName, CountryCode, CountryInitials)
-ON TARGET.Id = Source.Id
+ON TARGET.CountryId = Source.CountryId
 WHEN MATCHED THEN
 	UPDATE SET 
 		OfficialName = Source.OfficialName,
@@ -20,7 +18,5 @@ WHEN MATCHED THEN
 		CountryCode = Source.CountryCode,
 		CountryInitials = Source.CountryInitials
 WHEN NOT MATCHED BY TARGET THEN
-	INSERT (Id, OfficialName, ShortName, CountryCode, CountryInitials)
-	VALUES (Id, Official, ShortName, CountryCode, CountryInitials);
-
-SET IDENTITY_INSERT Countries OFF
+	INSERT (CountryId, OfficialName, ShortName, CountryCode, CountryInitials)
+	VALUES (CountryId, OfficialName, ShortName, CountryCode, CountryInitials);
